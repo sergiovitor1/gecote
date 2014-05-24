@@ -1,0 +1,65 @@
+@(loginF: Form[Login])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(inputSimples.render) }
+
+<html>
+    <head>
+        <title>GECotações</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+    </head>
+    <body>
+
+
+	        <div class="panel panel-default" style="width: 500px; margin-left: 350px; margin-top: 30px;">
+            <div class="panel-heading">Informe seus login</div>
+            <div class="panel-body">
+
+
+        @form(routes.Application.authenticate(), 'class->"form-horizontal") {
+
+
+	            @if(loginF.hasGlobalErrors) {
+	                <div class="form-group">
+	                    <div class="col-sm-12">
+	                        <div class="alert alert-danger">@loginF.globalError.message</div>
+	                    </div>
+	                </div>
+	            }
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                    	@inputText(loginF("email"),'class -> "form-control", 'placeholder->"Email", 'type->"text")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                    	@inputText(loginF("password"),'class->"form-control", 'placeholder->"Senha", 'type->"password")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Lembrar meus dados
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+                    </div>
+                </div>
+
+        }
+
+            </div>
+        </div>
+
+    </body>
+</html>
+
+
+
+

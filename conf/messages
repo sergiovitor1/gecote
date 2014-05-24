@@ -1,0 +1,8 @@
+# Messages
+
+Items.list.title=Item
+Empresas.list.title=Empresa
+Compras.list.title=Compra
+constraint.required = *
+constraint.max = Máximo: {0} 
+

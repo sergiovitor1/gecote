@@ -1,0 +1,67 @@
+@(empresaForm: Form[Empresa])
+
+@import helper._
+
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+
+
+@main("Empresas.list.title") {
+
+
+    @form(routes.EmpresaCtl.save(), 'class->"form-horizontal", 'style->"width:100%;" ,'role->"form") {
+
+
+        <div style="float: left; width: 50%;" >
+		            @inputText(empresaForm("id"), 'id->"idCnpj", '_label -> "CNPJ", 'class->"form-control",'maxlength->"14")
+		            @inputText(empresaForm("nome"), args = 'id->"idNome",'_label -> "Nome", 'class->"form-control", 'maxlength->"100")
+		            @inputText(empresaForm("razaoSocial"), 'id->"idRazao", '_label -> "Razão Social", 'class->"form-control",'maxlength->"100")
+		            @inputText(empresaForm("inscricaoMunicipal"), 'id->"idIM",'_label -> "IM",'class->"form-control",'maxlength->"30")
+		            @inputText(empresaForm("inscricaoEstadual"), 'id->"idIE", '_label -> "IE",'class->"form-control",'maxlength->"60")
+		            @inputText(empresaForm("telefone"), 'id->"idFone", '_label -> "Telefone",'class->"form-control", 'maxlength->"15")
+		            @inputText(empresaForm("email"), 'id->"idEmail", '_label -> "Email",'class->"form-control", 'maxlength->"50")
+		            @inputText(empresaForm("emailAlternativo"), 'id->"idEmailAlt", '_label -> "Email Alternativo",'class->"form-control", 'maxlength->"50")
+
+
+        </div>
+
+        <div style="float: right; width: 50%;">
+		            @inputText(empresaForm("endereco.descricao"), 'id->"idEnd", '_label -> "Endereço",'class->"form-control",'maxlength->"30")
+		            @inputText(empresaForm("endereco.complemento"), 'id->"idComp", '_label -> "Complemento",'class->"form-control",'maxlength->"30")
+		            @inputText(empresaForm("endereco.numero"), 'id->"idNumero", '_label -> "Número",'class->"form-control",'maxlength->"30")
+		            @inputText(empresaForm("endereco.cep"), 'id->"idCep", '_label -> "CEP",'class->"form-control",'maxlength->"30")
+
+
+		            @select(
+		                empresaForm("endereco.cidade.id"), 
+		                options(Cidade.options), 
+		                '_label -> "Cidade", '_default -> "-- Selecione --", 'class->"form-control",
+		                '_showConstraints -> false
+		            )
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-6">
+                <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+                <a href="@routes.EmpresaCtl.list()" style="margin-left:15px;" type="button" class="btn btn-default btn-lg">Cancelar</a>
+            </div>
+        </div>
+
+
+	  
+	}
+	
+	
+	
+	
+	</div>
+    
+    
+    
+    
+       
+        
+    
+    
+}

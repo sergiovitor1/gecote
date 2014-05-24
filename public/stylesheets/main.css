@@ -1,0 +1,27 @@
+.bg-header-table{
+    background-color: #E7E7E7;
+
+}
+
+.bg-header-sortdown{
+    background-color: #CCCCCC;
+    content: "\e113";
+}
+
+.bg-header-sortup{
+    background-color: #CCCCCC;
+}
+
+.modal-footer{
+    background-color: #eee;
+    border-radius: 6px;
+}
+
+.form-control{
+    border-radius: 2px !important;
+}
+
+.btn{
+    border-radius: 2px !important;
+}
+

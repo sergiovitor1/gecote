@@ -1,0 +1,121 @@
+@(currentPage: Empresa.Page, currentSortBy: String, currentOrder: String, currentFilter: String)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.EmpresaCtl.list(newPage, sortBy, order, currentFilter)
+    
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") bg-header-table @if(currentSortBy == key) @{if(currentOrder == "asc") "bg-header-sortdown" else "bg-header-sortup"}">
+        <a style="color:black !important;" href="@link(0, key)">@title</a>
+    </th>
+}
+
+@main("Empresas.list.title") {
+	
+
+	<form class="form-inline" role="form" name="f" action="@link(0, "nome")" method="GET" style="margin-bottom:15px;">
+		<div class="form-group">
+		
+           <input class="form-control" style="width:200px;" type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filtrar por nome...">
+		  <button class="btn btn-primary" type="submit" id="searchsubmit">Buscar</button>
+	      <a class="btn btn-success" style="margin-left: 770px;" id="add" href="@routes.EmpresaCtl.create()">Cadastrar</a>
+    	</div>
+    </form>
+    
+    	
+        
+    
+    @if(currentPage.getTotalRowCount == 0) {
+        
+        <div class="well">
+            <em>Vazio</em>
+        </div>
+        
+    } else {
+        
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    @header("id", "CNPJ")
+                    @header("nome", "Nome")
+                    @header("razaoSocial", "Razão Social")
+                    @header("null", "Ações")
+                </tr>
+            </thead>
+            <tbody>
+
+                @for(Empresa <- currentPage.getList) {
+                    <tr>
+                        <td><a href="@routes.EmpresaCtl.edit(Empresa.id)">@Empresa.id</a></td>
+                        <td>
+                            @Empresa.nome
+                        </td>
+                        <td>
+                        	@Empresa.razaoSocial 
+                        </td>
+                        <td style="width: 40px;">
+                            <a id="idAcao" data-toggle="modal" name="/empresas/delete/" data-id="@Empresa.id" title="Desativar" href="#confirmOperacao"><span class="glyphicon glyphicon-off"/></a>
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        
+        <div id="pagination" style="width: 40%;">
+            <ul class="pager">
+                @if(currentPage.hasPrev) {
+                    <li class="previous">
+                        <a href="@link(currentPage.getPageIndex - 1, null)">&larr; Voltar</a>
+                    </li>
+                } else {
+                    <li class="previous disabled">
+                        <a>&larr; Voltar</a>
+                    </li>
+                }
+                <li class="current">
+                    <a>Página @currentPage.getDisplayXtoYofZ</a>
+                </li>
+                @if(currentPage.hasNext) {
+                    <li class="next">
+                        <a href="@link(currentPage.getPageIndex + 1, null)">Avançar &rarr;</a>
+                    </li>
+                } else {
+                    <li class="next disabled">
+                        <a>Avançar &rarr;</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        
+    }
+        
+}
+
+            

@@ -1,0 +1,76 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Default path will just redirect to the computer list
+GET         /home                           controllers.Application.index()
+
+# Authentication
+GET     /                                   controllers.Application.login()
+POST    /login                              controllers.Application.authenticate()
+GET     /logout                             controllers.Application.logout()
+
+
+# Item 
+
+GET         /itens                      controllers.ItemCtl.list(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
+
+GET         /itens/novo                  controllers.ItemCtl.create()
+POST        /itens                      controllers.ItemCtl.save()
+
+GET         /itens/:id                  controllers.ItemCtl.edit(id:Long)
+POST        /itens/:id                  controllers.ItemCtl.update(id:Long)
+
+POST        /itens/delete/:id           controllers.ItemCtl.delete(id:Long)
+
+# Empresa 
+
+GET         /empresas                   controllers.EmpresaCtl.list(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
+
+GET         /empresas/novo               controllers.EmpresaCtl.create()
+POST        /empresas                   controllers.EmpresaCtl.save()
+
+GET         /empresas/:id               controllers.EmpresaCtl.edit(id:Long)
+POST        /empresas/:id               controllers.EmpresaCtl.update(id:Long)
+
+POST        /empresas/delete/:id        controllers.EmpresaCtl.delete(id:Long)
+
+# Compras
+
+#GET         /compras                   controllers.CompraCtl.list(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
+
+GET         /compras/novo               controllers.CompraCtl.create()
+#POST        /compras                   controllers.CompraCtl.save()
+#
+#GET         /compras/:id               controllers.CompraCtl.edit(id:Long)
+#POST        /compras/:id               controllers.CompraCtl.update(id:Long)
+#
+#POST        /compras/delete/:id        controllers.CompraCtl.delete(id:Long)
+
+
+#Usuário
+
+#GET     /                           controllers.Application.index()
+
+# Computers list (look at the default values for pagination parameters)
+#GET     /usuarios                  controllers.UsuarioCtl.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+
+# Add computer
+#GET     /usuarios/new              controllers.UsuarioCtl.create()
+#POST    /usuarios                  controllers.UsuarioCtl.save()
+
+# Edit existing computer
+#GET     /usuarios/:id              controllers.UsuarioCtl.edit(id:Long)
+#POST    /usuarios/:id              controllers.UsuarioCtl.update(id:Long)
+
+# Delete a computer
+#POST    /usuarios/:id/delete       controllers.UsuarioCtl.delete(id:Long)
+
+
+
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file               controllers.Assets.at(path="/public", file)

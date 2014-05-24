@@ -1,0 +1,37 @@
+@(id: Long, empresaForm: Form[Empresa])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Empresas.list.title") {
+    
+    
+    @form(routes.EmpresaCtl.update(id), 'class->"form-horizontal", 'role->"form") {
+    	
+    	
+            @inputText(empresaForm("id"), 'id->"idCnpj", '_label -> "CNPJ", 'class->"form-control",'maxlength->"14")
+            @inputText(empresaForm("nome"), args = 'id->"idNome",'_label -> "Nome", 'class->"form-control", 'maxlength->"100")
+            @inputText(empresaForm("razaoSocial"), 'id->"idRazao", '_label -> "Razão Social", 'class->"form-control",'maxlength->"100")
+            @inputText(empresaForm("inscricaoMunicipal"), 'id->"idIM",'_label -> "IM",'class->"form-control",'maxlength->"30")
+            @inputText(empresaForm("inscricaoEstadual"), 'id->"idIE", '_label -> "IE",'class->"form-control",'maxlength->"60")
+            @inputText(empresaForm("endereco"), 'id->"idEnd", '_label -> "Endereço",'class->"form-control", 'readonly->"true")
+            @inputText(empresaForm("telefone"), 'id->"idFone", '_label -> "Telefone",'class->"form-control", 'maxlength->"15")
+            @inputText(empresaForm("email"), 'id->"idEmail", '_label -> "Email",'class->"form-control", 'maxlength->"50")
+            @inputText(empresaForm("emailAlternativo"), 'id->"idEmailAlt", '_label -> "Email Alternativo",'class->"form-control", 'maxlength->"50")
+
+            
+
+		<div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">
+	    	<button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+			<a href="@routes.EmpresaCtl.list()" style="margin-left:15px;" type="button" class="btn btn-default btn-lg">Cancelar</a>
+	    </div>
+	  </div>
+	  
+	}
+	@form(routes.EmpresaCtl.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Deletar empresa" class="btn-lg btn btn-danger">
+    }
+    
+}

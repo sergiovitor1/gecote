@@ -1,0 +1,28 @@
+@(id: Long, itemForm: Form[Item])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Items.list.title") {
+    
+    
+    @form(routes.ItemCtl.update(id), 'class->"form-horizontal", 'style->"width:50%;" , 'role->"form") {
+    	
+            @inputText(itemForm("nome"), 'id->"idNome", '_label -> "Nome", 'class->"form-control",'maxlength->"30")
+            @textarea(itemForm("descricao"), args = 'id->"idDesc",'_label -> "Descrição", 'rows -> 4, 'cols -> 50, 'class->"form-control", 'maxlength->"200")
+            @inputText(itemForm("marca"), 'id->"idMarca",'_label -> "Marca",'class->"form-control",'maxlength->"30")
+            @inputText(itemForm("modelo"), 'id->"idModelo", '_label -> "Modelo",'class->"form-control",'maxlength->"60")
+
+            
+
+		<div class="form-group">
+	    <div class="col-sm-offset-3 col-sm-10">
+	    	<button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+			<a href="@routes.ItemCtl.list()" style="margin-left:15px;" type="button" class="btn btn-default btn-lg">Cancelar</a>
+	    </div>
+	  </div>
+	  
+	}
+    
+}
